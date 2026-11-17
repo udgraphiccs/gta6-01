@@ -10,7 +10,7 @@
 //   'mission' — a mission in progress with its objective marker visible.
 //   'marina'  — on foot near the Marina, by the beach and the sea.
 
-import { WORLD_WIDTH, WORLD_HEIGHT, DISTRICTS, COAST } from './config.js';
+import { WORLD_WIDTH, WORLD_HEIGHT, DISTRICTS, COAST, CAR_TYPES } from './config.js';
 import { clamp } from './util.js';
 import { buildCity, nearestRoadPoint } from './world.js';
 import { spawnTraffic, spawnParkedCars } from './vehicles.js';
@@ -100,13 +100,20 @@ function placeDriving(state, x, y, angle) {
 
 // The player driving downtown with police on their tail: wanted
 // level 3, police cars spawned near the player by the police module.
+// The staged car is a sports car at full speed, so the scene opens
+// mid-flight instead of coasting to a stop before the shot is taken.
 function stageChase(state) {
   const downtown = DISTRICTS.downtown;
   const cx = downtown.x + downtown.w / 2;
   const cy = downtown.y + downtown.h / 2;
   const road = nearestRoadPoint(state.city, cx, cy) || { x: cx, y: cy };
   ensureCityLife(state);
-  placeDriving(state, road.x, road.y, 0);
+  const car = placeDriving(state, road.x, road.y, 0);
+  car.type = 'sports';
+  car.length = 46;
+  car.width = 22;
+  car.speed = CAR_TYPES.sports.topSpeed;
+  state.player.speed = car.speed;
   state.wanted = 3;
   state.heat = 36;
   spawnPolice(state);

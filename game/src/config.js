@@ -52,7 +52,7 @@ export const HEAT_DECAY = 1.5;
 export const POLICE_SPAWN_INTERVAL = 4;
 export const POLICE_MAX_ACTIVE = 8;
 export const POLICE_CHASE_RANGE = 900;
-export const POLICE_RAM_DAMAGE = 8;
+export const POLICE_RAM_DAMAGE = 5;
 
 // Mission rewards (cash).
 export const MISSION_REWARDS = {

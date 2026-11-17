@@ -336,7 +336,7 @@ function ramPlayerCar(state, car) {
   car.speed = (car.speed || 0) * 0.6;
   const r = rt(state);
   const last = r.ramCooldown.get(car.id);
-  if (last == null || state.time - last > 1) {
+  if (last == null || state.time - last > 1.5) {
     state.player.health = Math.max(
       0, (state.player.health || 100) - POLICE_RAM_DAMAGE);
     r.ramCooldown.set(car.id, state.time);
