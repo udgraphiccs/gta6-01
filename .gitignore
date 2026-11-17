@@ -1,0 +1,5 @@
+kit/
+kit.tgz
+out/
+node_modules
+.DS_Store
